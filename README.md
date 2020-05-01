@@ -69,6 +69,18 @@ npm install
 npm run build
 ```
 
+### Create .env file (only .env.example on github)
+```
+vi .env
+```
+Using **_.env.example_** file, you can copy the instructions there and paste them on **_.env_** file like this:
+```
+ENV=development
+PORT=3001
+```
+you can change the port, of course!
+
+
 ### Start fake API
 Start the json server to simulate an API for this project.
 ```
@@ -82,8 +94,10 @@ Now, open a new terminal, in the same folder, and execute with
 npm run start:dev
 ```
 
-------
+Finally, you can view the project on [localhost:<your_port>](http://localhost:3001/)
+Remember that you must use the same port that you define on your **_.env_** file
 
+------
 
 #### Follow me 
 [fertorresmx.dev](http://fertorresmx.dev/)
