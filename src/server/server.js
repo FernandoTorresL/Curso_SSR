@@ -1,27 +1,27 @@
 /* eslint-disable global-require */
-import express from "express";
-import dotenv from "dotenv";
-import webpack from "webpack";
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import { renderRoutes } from "react-router-config";
-import { StaticRouter } from "react-router-dom";
-import serverRoutes from "../frontend/routes/serverRoutes";
-import reducer from "../frontend/reducers/index";
-import initialState from "../frontend/initialState";
+import express from 'express';
+import dotenv from 'dotenv';
+import webpack from 'webpack';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { renderRoutes } from 'react-router-config';
+import { StaticRouter } from 'react-router-dom';
+import serverRoutes from '../frontend/routes/serverRoutes';
+import reducer from '../frontend/reducers/index';
+import initialState from '../frontend/initialState';
 
 dotenv.config();
 
 const { ENV, PORT } = process.env;
 const app = express();
 
-if (ENV === "development") {
-  console.log("Development config");
-  const webpackConfig = require("../../webpack.config");
-  const webpackDevMiddleware = require("webpack-dev-middleware");
-  const webpackHotMiddleware = require("webpack-hot-middleware");
+if (ENV === 'development') {
+  console.log('Development config');
+  const webpackConfig = require('../../webpack.config');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
   const serverConfig = { port: PORT, hot: true };
 
@@ -56,13 +56,13 @@ const renderApp = (req, res) => {
       <StaticRouter location={req.url} context={{}}>
         {renderRoutes(serverRoutes)}
       </StaticRouter>
-    </Provider>
+    </Provider>,
   );
 
   res.send(setResponse(html, preloadedState));
 };
 
-app.get("*", renderApp);
+app.get('*', renderApp);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
