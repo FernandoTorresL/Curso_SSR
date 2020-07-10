@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 require('dotenv').config();
 
@@ -65,11 +66,13 @@ module.exports = {
   },
   plugins: [
     isDev ? new webpack.HotModuleReplacementPlugin() : () => { },
-    isDev ? () => {} :
+    isDev ? () => { } :
       new CompressionWebpackPlugin({
         test: /\.js$|\.css$/,
         filename: '[path].gz',
       }),
+    isDev ? () => { } :
+      new ManifestPlugin(),
     new MiniCssExtractPlugin({
       filename: isDev ? 'assets/app.css' : 'assets/app-[hash].css',
     }),
